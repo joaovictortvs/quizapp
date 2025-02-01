@@ -3,32 +3,20 @@ import '../../output.css'
 import BoxLink from '../itensPages/BoxLink'
 
 function Home(){
- //https://quizapi.io/api/v1/questions?category=Networking&limit=10 exemplo de requisiçao
-    function requestApi(){
-        fetch('https://quizapi.io/api/v1/categories', {
-            method: 'GET',
-            headers: {
-                'X-Api-Key': "9irGLKfYx2BJQbpKf4dBDCw4k7LKRG6CexZY4zTD"
-            }
-        })
-
-        .then(resp => resp.json())
-        .then(data=> console.log(data))
-    }
 
     return(
         <div className='w-full h-full flex flex-col justify-start items-center'>
-            <p className='self-start text-xl m-4' onClick={requestApi}>Home</p>
-            <BoxLink pagina='react' name="React"/>
-            <BoxLink pagina='nodejs' name="Node Js"/>
-            <BoxLink pagina='nextjs' name="Next Js"/>
-            <BoxLink pagina='vuejs' name="Vue Js"/>
-            <BoxLink pagina='django' name="Django"/>
-            <BoxLink pagina='linux' name="Linux"/>
-            <BoxLink pagina='bash' name="Bash"/>
-            <BoxLink pagina='sql' name="SQL"/>
-            <BoxLink pagina='devops' name="DevOps"/>
-            <BoxLink pagina='wordpress' name="WordPress"/>
+            <p className='self-start text-xl m-4'>Home</p>
+            <BoxLink name="React" id='React' page={false}/>
+            <BoxLink name="Node Js" id='NodeJs' page={false}/>
+            <BoxLink name="Next Js" id='Next.js' page={false}/>
+            <BoxLink name="Vue Js" id='VueJS' page={false}/>
+            <BoxLink name="Django" id='Django' page={false}/>
+            <BoxLink name="Linux" id='Linux' page={false}/>
+            <BoxLink name="Bash" id='Bash' page={false}/>
+            <BoxLink name="SQL" id='SQL' page={false}/>
+            <BoxLink name="DevOps" id='DevOps' page={false}/>
+            <BoxLink name="WordPress" id='WordPress' page={false}/>
         </div>
         
     )
