@@ -1,8 +1,21 @@
+import { useLocation, useParams } from "react-router-dom"
+import {useState} from 'react'
+
+import '../../output.css'
+
 function Facil(){
 
-    //https://quizapi.io/api/v1/questions?category=Networking&limit=10 exemplo de requisiçao
+    const { id } = useParams()
+    const location = useLocation()    
+    
+    const level = location.state?.level
+
+    function createQuestion(questions){
+       // criar questões
+    }
+
     function requestApi(){
-        fetch('https://quizapi.io/api/v1/categories', {
+        fetch(`https://quizapi.io/api/v1/questions?category=${id}&difficulty=${level}&limit=10`, {
             method: 'GET',
             headers: {
                 'X-Api-Key': "9irGLKfYx2BJQbpKf4dBDCw4k7LKRG6CexZY4zTD"
@@ -10,11 +23,11 @@ function Facil(){
         })
 
         .then(resp => resp.json())
-        .then(data=> console.log(data))
+        .then(data=> createQuestion(data))
     }
 
     return(
-        <p>Fácil</p>
+        <p onClick={requestApi}>Fácil</p>
     )
     
 }
