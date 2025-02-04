@@ -15,8 +15,9 @@ function Facil(){
     const [terminoQuiz, setTerminoQuiz] = useState(false)
 
     const [titulo, setTitulo] = useState()
-    const [quests, setQuests] = useState([])
+    const [quests, setQuests] = useState()
     const [indiceAtual, setIndiceAtual] = useState(0)
+    const [perguntaContagem, setPerguntaContagem] = useState(1)
     const [questsAtual, setQuestsAtual] = useState()
 
     const { id } = useParams()
@@ -27,24 +28,15 @@ function Facil(){
         setRemoveLoading(true)
         setQuestShow(true)
         setQuests(questions)
-        
-        setIndiceAtual((prevIndice)=>{
-            if(prevIndice < questions.length - 1){
-                return prevIndice + 1
-            } else{
-                setTerminoQuiz(true)
-                return prevIndice
-            }
-        })
 
+        setTitulo(questions[indiceAtual].question)
+        setQuestsAtual(questions[indiceAtual].answers)
     }
 
-    useEffect(()=>{
-        if(quests.length > 0 && indiceAtual < quests.length){
-            setTitulo(quests[indiceAtual].question)
-            setQuestsAtual(quests[indiceAtual].answers)
-        }
-    }, [indiceAtual, quests])
+    function nextQuestion(e){
+        setIndiceAtual(prevIndice => prevIndice + 1)
+        setPerguntaContagem(numPerg => numPerg + 1)
+    }
 
     useEffect(()=>{
         const options = {
@@ -71,7 +63,7 @@ function Facil(){
         }
         requestApi()
 
-    }, [id, level])
+    }, [id, level, perguntaContagem])
 
     return(
         <div className="flex w-full h-full justify-center">
@@ -82,10 +74,10 @@ function Facil(){
             )}
             {questShow !== false &&  (
                 <div className="flex flex-col w-5/10 text-black items-center flex-wrap">
-                    <p className="text-2xl text-gray-100">Pergunta {indiceAtual} de 10</p>
+                    <p className="text-2xl text-gray-100">Pergunta {perguntaContagem} de 10</p>
                     {terminoQuiz && (<p className="text-green-500 my-2">Quiz terminado!</p>)}
                     <Titulo titulo={titulo}/>
-                    <Perguntas perguntas={questsAtual} />
+                    <Perguntas perguntas={questsAtual} clickQuest={nextQuestion}/>
                 </div>
             )}  
             {erroQuestShow && (
