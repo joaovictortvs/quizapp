@@ -27,18 +27,27 @@ function Facil(){
     function createQuestion(questions){
         setRemoveLoading(true)
         setQuestShow(true)
-        setQuests(questions)
 
         setTitulo(questions[indiceAtual].question)
         setQuestsAtual(questions[indiceAtual].answers)
+        setIndiceAtual(prevIndice=> prevIndice + 1)
     }
 
     function nextQuestion(e){
-        setIndiceAtual(prevIndice => prevIndice + 1)
-        setPerguntaContagem(numPerg => numPerg + 1)
+        if(indiceAtual < quests.length - 1){
+            setIndiceAtual(prevIndice => prevIndice + 1)
+            setPerguntaContagem(numPerg => numPerg + 1)
+            createQuestion(quests)
+        } else{
+            setTerminoQuiz(true)
+            setIndiceAtual(0)
+            setPerguntaContagem(1)
+        }
+     
     }
 
     useEffect(()=>{
+
         const options = {
             method: 'GET',
             headers: {
@@ -63,7 +72,7 @@ function Facil(){
         }
         requestApi()
 
-    }, [id, level, perguntaContagem])
+    }, [])
 
     return(
         <div className="flex w-full h-full justify-center">
@@ -73,8 +82,8 @@ function Facil(){
                 </div>
             )}
             {questShow !== false &&  (
-                <div className="flex flex-col w-5/10 text-black items-center flex-wrap">
-                    <p className="text-2xl text-gray-100">Pergunta {perguntaContagem} de 10</p>
+                <div className="flex flex-col w-5/10 text-black items-center ">
+                    <p className="text-2xl text-gray-100">Pergunta <span>{perguntaContagem}</span> de 10</p>
                     {terminoQuiz && (<p className="text-green-500 my-2">Quiz terminado!</p>)}
                     <Titulo titulo={titulo}/>
                     <Perguntas perguntas={questsAtual} clickQuest={nextQuestion}/>
