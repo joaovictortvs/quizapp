@@ -42,11 +42,11 @@ function Facil(){
             setPerguntaContagem(numPerg => numPerg + 1)
         }
 
-        if(respFalseTrue === true){
+        if(respFalseTrue === 'true'){
             setRespostasCertas(quantidade => quantidade + 1)
         }
 
-        if(indiceAtual < quests.length - 1){
+        if(indiceAtual < quests.length){
             createQuestion(quests)
         } else{
             setTerminoQuiz(true)
