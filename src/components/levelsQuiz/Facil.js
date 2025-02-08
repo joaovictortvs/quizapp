@@ -105,7 +105,7 @@ function Facil(){
                                 <p className="text-4xl font-semibold">Result :</p>
                                 <span className="text-5xl font-bold text-green-600">{respostasCertas}/10</span>
                             </div>    
-                            <Link to='/' className="py-4 px-6 bg-cyan-950 rounded-md hover:bg-cyan-800 duration-200">Voltar</Link>
+                            <Link to='/' className="py-4 px-6 bg-cyan-950 rounded-md hover:bg-cyan-800 duration-200">Back</Link>
                         </div>    
                     )}
             {erroQuestShow && (
